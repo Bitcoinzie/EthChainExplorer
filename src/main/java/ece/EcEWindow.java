@@ -48,6 +48,8 @@ import javax.swing.JToolBar;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import java.awt.FlowLayout;
+import java.awt.Image;
+import java.awt.Toolkit;
 import static java.lang.Thread.sleep;
 import java.text.ParseException;
 
@@ -105,6 +107,10 @@ public class EcEWindow extends JFrame {
             introLogger.info("EthChain Explorer supports version 1.8 and higher Java Runtime Versions please update to the latest update");
             System.exit(0);
         }
+        java.net.URL url = ClassLoader.getSystemResource("EcEico.png");
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        Image img = kit.createImage(url);
+        this.setIconImage(img);
         this.center = BorderLayout.CENTER;
         this.west = BorderLayout.WEST;
         this.east = BorderLayout.EAST;
