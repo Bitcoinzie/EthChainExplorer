@@ -22,7 +22,6 @@ THE SOFTWARE.
 package fetch;
 
 import org.ethereum.core.Block;
-import org.ethereum.listener.CompositeEthereumListener;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,7 +38,7 @@ import java.io.Writer;
  *
  * @author Bitcoinzie
  */
-public class BlockFetch extends CompositeEthereumListener {
+public class BlockFetch {
     private static final Logger blc = LoggerFactory.getLogger("BlockFetch");
     static Writer w = null;
     public  String dir;
