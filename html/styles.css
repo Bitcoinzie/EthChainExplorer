@@ -1,0 +1,89 @@
+ body{
+	background-color: #333333;
+	margin: 0;
+	padding: 0;
+	color: #D3D3D3;
+	text-shadow: 1px 1px 0px #000;
+ }
+ header{
+	background-color: #666666;
+	border: 1px solid black;
+	font-family: Verdana, Geneva, sans-serif;
+	margin: 5px;
+	min-height: 80px;
+	padding: 1px;
+	-webkit-border-radius: 5px;
+	-webkit-box-shadow: inset 0px 0px 10px 2px #000;
+ }
+ strong{
+	font-style: italic;
+ }
+ #logo{
+	background-image: url('EthChainExplorerLogo.png');
+	background-size:225px 80px;
+	margin:0;
+	padding:0;
+	width:225px;
+	height:80px;
+ }
+ #blocks{
+	background-color: #666666;
+	clear: left;
+	border: 2px solid black;
+	margin: 5px;
+	padding: 5px 5px 20px 5px;
+	overflow: auto;
+	-webkit-border-radius: 5px;
+	-webkit-box-shadow: inset 0px 0px 15px 0px #000;
+ }
+ #blocks p{
+	background-color: #666666;
+	border: 1px solid black;
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 10pt;
+	max-height: 300px;
+	overflow: auto;
+	padding: 5px;
+	word-break: break-word;
+	-webkit-border-radius: 5px;
+	-webkit-box-shadow: inset 0px 0px 4px 0px #000;
+ }
+ #rlp, #trans, #extra, #uncles{
+	background-color: #666666;
+	border: 1px solid black;
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 12pt;
+	padding: 0;
+	padding-bottom:8px;
+	margin: 0;
+	-webkit-border-radius: 5px;
+	-webkit-box-shadow: inset 0px 0px 4px 0px #000;
+ }
+ #rlp p, #trans p, #extra p, #uncles p{
+	background-color:none;
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 10pt;
+	max-height: 300px;
+	overflow: auto;
+	padding: 0 5px 5px 5px;
+	word-break: break-word;
+	margin: 5px 5px 5px 5px;
+	border:none;
+	-webkit-border-radius: none;
+	-webkit-box-shadow: none;
+ }
+ #rlp span, #trans span, #extra span, #uncles span{
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 10pt;
+	display:block;
+	padding:5px 5px 0px 5px;
+ }
+ #trans{
+	margin-top: 14px;
+ }
+ #extra{
+	margin-bottom:10px;
+ }
+#uncles{
+	margin-bottom:14px;
+}
