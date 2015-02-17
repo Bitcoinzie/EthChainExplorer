@@ -107,7 +107,7 @@ public class EcEWindow extends JFrame {
             introLogger.info("EthChain Explorer supports version 1.8 and higher Java Runtime Versions please update to the latest update");
             System.exit(0);
         }
-        java.net.URL url = ClassLoader.getSystemResource("EcEico.png");
+        java.net.URL url = ClassLoader.getSystemResource("buttons/EcEico.png");
         Toolkit kit = Toolkit.getDefaultToolkit();
         Image img = kit.createImage(url);
         this.setIconImage(img);
