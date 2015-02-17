@@ -203,7 +203,7 @@ public class EcEWindow extends JFrame {
             loadURL("file:///" + dir + "blockNull.html");
             engine.titleProperty().addListener((ObservableValue<? extends String> observable, String oldValue, final String newValue) -> {
                 SwingUtilities.invokeLater(() -> {
-                    EcEWindow.this.setTitle(newValue);
+                    this.setTitle(newValue);
                 });
             });
             jfxPanel.setScene(new Scene(view));
