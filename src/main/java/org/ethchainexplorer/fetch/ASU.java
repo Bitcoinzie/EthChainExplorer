@@ -40,13 +40,11 @@ import java.util.ArrayList;
  * @author Bitcoinzie
  */
 public class ASU {
-    
     private static final Ethereum eth = EcEWindow.eth;
 //    private static final Wallet wallet = eth.getWallet();
 //    private static final Repository repository = eth.getRepository();
     private static final ArrayList acntList = new ArrayList<>();
     private static Account account;
-    
     public ASU(){}
     
     /**
@@ -62,26 +60,21 @@ public class ASU {
         return null;
         //}
         //return acntList;
-    }
-    
+    }    
     /**
      *
      * Adds new account to the users wallet
      */
     public static void addNew() {
-        //wallet.addNewAccount();
-        
+        //wallet.addNewAccount();   
     }
-    
     public static void importAc(Account acnt){
         //wallet.importKey(acnt.getEcKey().getPrivKeyBytes());
-    }
-    
+    }    
     public static void saveAcnt(byte[] addr){
         //repository.addBalance(addr, BigInteger.ZERO);
 //        repository.createAccount(addr);
-    }
-    
+    }    
     /**
      *
      * @param str hex string representing a value in the format 0x21 to be converted to decimal in the format 15
@@ -89,8 +82,7 @@ public class ASU {
      */
     public static String toDecimal(String str) {
         return hexStringToDecimalString(str);
-    }
-    
+    }    
     /**
      *Checks the balance at a give address
      * @param address a 20 character Hex String
@@ -100,8 +92,7 @@ public class ASU {
 	byte[] addr = Utils.addressStringToBytes(address);
 //            return repository.getBalance(addr);
         return null;
-    }
-    
+    }    
     /**
      *
      * @param addr byte [] Address of the Account to check storage
@@ -111,8 +102,7 @@ public class ASU {
     public static DataWord storageAt(byte[] addr, DataWord key) {
         return null;
 //         return repository.getStorageValue(addr, key);
-    }
-    
+    }    
     /**
      *
      * @param address
@@ -131,8 +121,7 @@ public class ASU {
 //	final byte[] programCode = contractDetails.getCode();
 //	return programCode;
         return null;
-    }
-    
+    }    
     /**
      *
      * @param addr byte[] array representing the address of the account to get the transactions nonce from
@@ -142,11 +131,9 @@ public class ASU {
         return null;
 //        return repository.getNonce(addr); 
     }
-    
     public static BigInteger countAt(Account ac) {
         return ac.getNonce(); 
-    }
-  
+    }  
     /**
      *
      * @return int value representing the number of peers this client is connected to
@@ -156,7 +143,6 @@ public class ASU {
         //Set<PeerInfo> peers = eth.getPeers();
         //return peers.size();
     }
-    
     /**
      *
      * @param BgIn Balance of the Account
@@ -165,6 +151,4 @@ public class ASU {
     public static String toEth(BigInteger BgIn) {
         return toFriendlyString(BgIn);
     }
-    
-    
 }

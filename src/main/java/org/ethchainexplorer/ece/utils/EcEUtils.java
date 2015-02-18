@@ -33,7 +33,7 @@ import java.awt.Insets;
  *
  * @author Bitcoinzie
  * @since 07.01.2015
- * @version 1.0
+ * @version 0.01
  */
 public class EcEUtils {
     static final String ip = SystemProperties.CONFIG.activePeerIP();
@@ -47,9 +47,7 @@ public class EcEUtils {
         raisedetched = BorderFactory.createEtchedBorder(EtchedBorder.RAISED);
         panel.setBorder(raisedetched);
         panel.setBackground(Color.darkGray);
-        
     }
-    
     /**
      *
      * @param panel
@@ -58,15 +56,12 @@ public class EcEUtils {
         Border empty;
         empty = BorderFactory.createEmptyBorder(3, 3, 3, 3);
         panel.setBorder(empty);
-    
     }
-    
     public static void setEtchP(JPanel panel, String name){
         Border raisedetched;
         raisedetched = BorderFactory.createEtchedBorder(EtchedBorder.RAISED);
         panel.setBorder(raisedetched);
     }
-    
     /**
      *
      * @param panel
@@ -78,7 +73,6 @@ public class EcEUtils {
         panel.setBackground(dg);
         panel1.setBackground(dg);
     }
-    
     /**
      *
      * @param btn
@@ -125,7 +119,6 @@ public class EcEUtils {
             btn.setMargin(new Insets(3,3,3,3));
         }
     }
-    
     public static void addStyle(JButton btn, String name){
         if(name.toLowerCase().contains("fav")){
             btn.setContentAreaFilled(false);
@@ -145,18 +138,13 @@ public class EcEUtils {
             btn.setMargin(new Insets(4,4,4,4));
         }
     }
-    
-    
     public static void addStyle(JToolBar t){
         t.setFloatable(false);
         t.setRollover(true);
     }
-    
     public static void addStyle(JSplitPane sp){
         sp.setOrientation(VERTICAL_SPLIT);
-         
     }
-    
     public static void addStyle(JScrollPane sc, String name){
         if(name.equalsIgnoreCase("spDap")){
             sc.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -172,7 +160,6 @@ public class EcEUtils {
         }
         
     }
-    
     public static void connect2Net(){ 
         Logger c2n = LoggerFactory.getLogger("Connect 2 Net");
         Thread t = new Thread() {    
@@ -197,8 +184,3 @@ public class EcEUtils {
         t.start();
     }
 }
-     
-     
-    
-
-   

@@ -29,7 +29,6 @@ public class NumericTextField extends JTextField implements
   public NumericTextField() {
     this(null, 0, null);
   }
-
   public NumericTextField(String text, int columns, DecimalFormat format) {
     super(null, text, columns);
 
@@ -37,66 +36,51 @@ public class NumericTextField extends JTextField implements
     if (format != null) {
       numericDoc.setFormat(format);
     }
-
     numericDoc.addInsertErrorListener(this);
   }
-
   public NumericTextField(int columns, DecimalFormat format) {
     this(null, columns, format);
   }
-
   public NumericTextField(String text) {
     this(text, 0, null);
   }
-
   public NumericTextField(String text, int columns) {
     this(text, columns, null);
   }
-
   public void setFormat(DecimalFormat format) {
     ((NumericPlainDocument) getDocument()).setFormat(format);
   }
-
   public DecimalFormat getFormat() {
     return ((NumericPlainDocument) getDocument()).getFormat();
   }
-
   public void formatChanged() {
     // Notify change of format attributes.
     setFormat(getFormat());
   }
-
   // Methods to get the field value
   public Long getLongValue() throws ParseException {
     return ((NumericPlainDocument) getDocument()).getLongValue();
   }
-
   public Double getDoubleValue() throws ParseException {
     return ((NumericPlainDocument) getDocument()).getDoubleValue();
   }
-
   public Number getNumberValue() throws ParseException {
     return ((NumericPlainDocument) getDocument()).getNumberValue();
   }
-
   // Methods to install numeric values
   public void setValue(Number number) {
     setText(getFormat().format(number));
   }
-
   public void setValue(long l) {
     setText(getFormat().format(l));
   }
-
   public void setValue(double d) {
     setText(getFormat().format(d));
   }
-
   public void normalize() throws ParseException {
     // format the value according to the format string
     setText(getFormat().format(getNumberValue()));
   }
-
   // Override to handle insertion error
   @Override
   public void insertFailed(NumericPlainDocument doc, int offset, String str,
@@ -104,28 +88,23 @@ public class NumericTextField extends JTextField implements
     // By default, just beep
     Toolkit.getDefaultToolkit().beep();
   }
-
   // Method to create default model
   @Override
   protected Document createDefaultModel() {
     return new NumericPlainDocument();
   }
 }
-
 final class NumericPlainDocument extends PlainDocument {
   public NumericPlainDocument() {
     setFormat(null);
   }
-
   public NumericPlainDocument(DecimalFormat format) {
     setFormat(format);
   }
-
   public NumericPlainDocument(AbstractDocument.Content content,
       DecimalFormat format) {
     super(content);
     setFormat(format);
-
     try {
       format
           .parseObject(content.getString(0, content.length()),
@@ -134,16 +113,13 @@ final class NumericPlainDocument extends PlainDocument {
       throw new IllegalArgumentException(
           "Initial content not a valid number");
     }
-
     if (parsePos.getIndex() != content.length() - 1) {
       throw new IllegalArgumentException(
           "Initial content not a valid number");
     }
   }
-
   public void setFormat(DecimalFormat fmt) {
     this.format = fmt != null ? fmt : (DecimalFormat) defaultFormat.clone();
-
     decimalSeparator = format.getDecimalFormatSymbols()
         .getDecimalSeparator();
     groupingSeparator = format.getDecimalFormatSymbols()
@@ -157,11 +133,9 @@ final class NumericPlainDocument extends PlainDocument {
     negativeSuffix = format.getNegativeSuffix();
     negativeSuffixLen = negativeSuffix.length();
   }
-
   public DecimalFormat getFormat() {
     return format;
   }
-
   public Number getNumberValue() throws ParseException {
     try {
       String content = getText(0, getLength());
@@ -170,61 +144,48 @@ final class NumericPlainDocument extends PlainDocument {
       if (parsePos.getIndex() != getLength()) {
         throw new ParseException("Not a valid number: " + content, 0);
       }
-
       return result;
     } catch (BadLocationException e) {
       throw new ParseException("Not a valid number", 0);
     }
   }
-
   public Long getLongValue() throws ParseException {
     Number result = getNumberValue();
     if ((result instanceof Long) == false) {
       throw new ParseException("Not a valid long", 0);
     }
-
     return (Long) result;
   }
-
   public Double getDoubleValue() throws ParseException {
     Number result = getNumberValue();
     if ((result instanceof Long) == false
         && (result instanceof Double) == false) {
       throw new ParseException("Not a valid double", 0);
     }
-
     if (result instanceof Long) {
       result = result.doubleValue();
     }
-
     return (Double) result;
   }
-
   @Override
   public void insertString(int offset, String str, AttributeSet a)
       throws BadLocationException {
     if (str == null || str.length() == 0) {
       return;
     }
-
     Content content = getContent();
     int length = content.length();
     int originalLength = length;
-
     parsePos.setIndex(0);
-
     // Create the result of inserting the new data,
     // but ignore the trailing newline
     String targetString = content.getString(0, offset) + str
         + content.getString(offset, length - offset - 1);
-
     // Parse the input string and check for errors
     do {
       boolean gotPositive = targetString.startsWith(positivePrefix);
       boolean gotNegative = targetString.startsWith(negativePrefix);
-
       length = targetString.length();
-
       // If we have a valid prefix, the parse fails if the
       // suffix is not present and the error is reported
       // at index 0. So, we need to add the appropriate
@@ -233,7 +194,6 @@ final class NumericPlainDocument extends PlainDocument {
         String suffix;
         int suffixLength;
         int prefixLength;
-
         if (gotPositive == true && gotNegative == true) {
           // This happens if one is the leading part of
           // the other - e.g. if one is "(" and the other "(("
@@ -243,7 +203,6 @@ final class NumericPlainDocument extends PlainDocument {
             gotPositive = false;
           }
         }
-
         if (gotPositive == true) {
           suffix = positiveSuffix;
           suffixLength = positiveSuffixLen;
@@ -254,13 +213,11 @@ final class NumericPlainDocument extends PlainDocument {
           suffixLength = negativeSuffixLen;
           prefixLength = negativePrefixLen;
         }
-
         // If the string consists of the prefix alone,
         // do nothing, or the result won't parse.
         if (length == prefixLength) {
           break;
         }
-
         // We can't just add the suffix, because part of it
         // may already be there. For example, suppose the
         // negative prefix is "(" and the negative suffix is
@@ -276,7 +233,6 @@ final class NumericPlainDocument extends PlainDocument {
               break;
             }
           }
-
           if (i == 0) {
             // None of the suffix was present
             targetString += suffix;
@@ -285,14 +241,11 @@ final class NumericPlainDocument extends PlainDocument {
           length = targetString.length();
         }
       }
-
       format.parse(targetString, parsePos);
-
       int endIndex = parsePos.getIndex();
       if (endIndex == length) {
         break; // Number is acceptable
       }
-
       // Parse ended early
       // Since incomplete numbers don't always parse, try
       // to work out what went wrong.
@@ -302,14 +255,12 @@ final class NumericPlainDocument extends PlainDocument {
           && targetString.regionMatches(0, positivePrefix, 0, length)) {
         break; // Accept for now
       }
-
       // Next check for an incomplete negative prefix
       if (negativePrefixLen > 0 && endIndex < negativePrefixLen
           && length <= negativePrefixLen
           && targetString.regionMatches(0, negativePrefix, 0, length)) {
         break; // Accept for now
       }
-
       // Allow a number that ends with the group
       // or decimal separator, if these are in use
       char lastChar = targetString.charAt(originalLength - 1);
@@ -319,25 +270,21 @@ final class NumericPlainDocument extends PlainDocument {
         // Allow a "," but only in integer part
         break;
       }
-
       if (format.isParseIntegerOnly() == false
           && lastChar == decimalSeparator
           && decimalIndex == originalLength - 1) {
         // Allow a ".", but only one
         break;
       }
-
       // No more corrections to make: must be an error
       if (errorListener != null) {
         errorListener.insertFailed(this, offset, str, a);
       }
       return;
     } while (true == false);
-
     // Finally, add to the model
     super.insertString(offset, str, a);
   }
-
   public void addInsertErrorListener(InsertErrorListener l) {
     if (errorListener == null) {
       errorListener = l;
@@ -346,13 +293,11 @@ final class NumericPlainDocument extends PlainDocument {
     throw new IllegalArgumentException(
         "InsertErrorListener already registered");
   }
-
   public void removeInsertErrorListener(InsertErrorListener l) {
     if (errorListener == l) {
       errorListener = null;
     }
   }
-
   public interface InsertErrorListener {
     public abstract void insertFailed(NumericPlainDocument doc, int offset,
         String str, AttributeSet a);

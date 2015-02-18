@@ -69,9 +69,7 @@ public class EcEWindow extends JFrame {
     private final JPanel topBar;
     private final JFXPanel jfxPanel;
     private WebEngine engine;
-    private final JPanel eastPanel;
     private final JPanel panel;
-    private final JPanel bPanel;
     private final JLabel txtLable;
     private final NumericTextField blcTxt;
     private final JButton blcFwd;
@@ -79,17 +77,16 @@ public class EcEWindow extends JFrame {
     private static final String dir = System.getProperty("user.dir") + "/html/";
     private final BlockFetch bf;
     
-    String north;
-    String south;
-    String east;
-    String west;
-    String center;
+    final String north;
+    final String south;
+    final String east;
+    final String west;
+    final String center;
     String old;
     
     public EcEWindow() throws InterruptedException, IOException {
         super();
         String version = CONFIG.projectVersion();
-
         introLogger.info("");
         introLogger.info("|Ξ|  EthereumJ [v" + version + "]");
         introLogger.info("|Ξ|  Code by Roman Mandeleil, (c) 2014.");
@@ -118,15 +115,12 @@ public class EcEWindow extends JFrame {
         this.north = BorderLayout.NORTH;
         this.topBar = new JPanel(new BorderLayout(5, 0));
         this.jfxPanel = new JFXPanel();
-        this.eastPanel = new JPanel(new GridLayout(0,1,0,2));
         this.panel = new JPanel(new BorderLayout());
-        this.bPanel = new JPanel(new BorderLayout());
         this.txtLable = new JLabel("Enter Block #");
         this.blcTxt = new NumericTextField("", 20);
         this.blcFwd = new JButton(">");
         this.blcBack = new JButton("<");
         this.bf = new BlockFetch();
-
         initComponents();
     }
     
@@ -161,11 +155,9 @@ public class EcEWindow extends JFrame {
             }
         });
         this.jfxPanel.setLayout(new BorderLayout());
-        
         addStyle(topBar);
         addStyle(this.blcBack, "back");
         addStyle(this.blcFwd, "fwd");
-        
         JToolBar tool = new JToolBar();
         tool.setLayout(new FlowLayout());
         tool.add(this.txtLable);
@@ -175,27 +167,15 @@ public class EcEWindow extends JFrame {
         tool.add(this.blcFwd);
         addStyle(tool);
         this.topBar.add(tool, north);
-        
-        this.eastPanel.setPreferredSize(new Dimension(200, 500));
-        this.eastPanel.setVisible(false);
-        this.bPanel.add(this.eastPanel, east);
-        
-        
-        this.bPanel.add(this.jfxPanel, center);
-        
         setEtchP(panel, "panel");
-        
         this.panel.add(this.topBar, north);
-        this.panel.add(this.bPanel, center);
+        this.panel.add(this.jfxPanel, center);
         getContentPane().add(this.panel);
-        
         this.setResizable(true);
         this.setPreferredSize(new Dimension(900, 900));//sets the default window size
-        addCloseAction();
-        
+        this.addCloseAction();
         this.pack();
     }
-
     private void createScene() {
         Platform.runLater(() -> {
             WebView view = new WebView();
@@ -209,11 +189,6 @@ public class EcEWindow extends JFrame {
             jfxPanel.setScene(new Scene(view));
         });
     }
-    
-    /**
-     *
-     * @param url Loads the URL to the browser
-     */
     public void loadURL(final String url){
         Platform.runLater(() -> {
             String tmp = url;
@@ -222,7 +197,6 @@ public class EcEWindow extends JFrame {
             engine.load(tmp);
         });
     }
-
     private String toURL(String str) {
         try{
             return new URL(str).toExternalForm();
@@ -235,7 +209,6 @@ public class EcEWindow extends JFrame {
         });
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
-    
     public static void main(String args[]) {
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
@@ -245,7 +218,6 @@ public class EcEWindow extends JFrame {
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
-        // If Nimbus is not available, you can set the GUI to another look and feel.
         }
         SwingUtilities.invokeLater(() -> {
             try {
@@ -253,9 +225,7 @@ public class EcEWindow extends JFrame {
             } catch (InterruptedException | IOException ex) {
             }
         });
-        
     }
-        
 }
 
 
